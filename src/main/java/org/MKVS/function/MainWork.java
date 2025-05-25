@@ -25,8 +25,6 @@ public class MainWork{
            marytts.setAudioEffects("Volume(amount:0.6)");
 
             Speaker.speak(marytts,"Hello. I am Mary and I am the voice of this project");
-            Speaker.speak(marytts,"Hello. I am Mary and I am the voice of this project");
-            Speaker.speak(marytts,"Hello. I am Mary and I am the voice of this project");
             CommandProcessor.startListening(marytts,config);
         }catch (Exception e){
             System.err.println("Startup error : "+e.getMessage());
