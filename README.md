@@ -87,5 +87,11 @@ The system goes back to listening for the next command unless the command is "by
 
 Exit Command;
 If the user says "bye", the system responds "Thank you" and stops listening by setting exit = true.
+_____________________________________________________________________________________________________________________________________________
+COLLABRATORS NAME:
+1. Sunny Gupta
+2. Mayank Kaul
+3. Vidhu Kaushik
+4. Kushal Trivedi
 
 
