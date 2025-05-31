@@ -162,7 +162,7 @@ class CommandProcessor{
                 break;
                 // closing whatsapp
                 case "close whatsapp" :
-                    Speaker.speak(marytts,"closing chrome");
+                    Speaker.speak(marytts,"closing whatsapp");
                     Runtime.getRuntime().exec("cmd.exe /c TASKKILL /IM whatsapp.exe /F");
                 break;
 
