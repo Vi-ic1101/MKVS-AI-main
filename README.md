@@ -1,6 +1,12 @@
 INSTRUCTIONS FOR THE PROJECT:
 
-1. main() Function (Class: MainWork)
+The program starts running with initial sound **" Hello. I am Mary and I am the voice of this project "**
+after that it **starts listening** to user's voice using **Sphinx CMU**
+using **MaryTTS** we made this program to speak 
+_____________________________________________________________________________________________________________________________________________
+
+
+**1. main() Function (Class: MainWork)**
 Purpose: This is the main entry point of the program. It initializes everything.
 
 Step-by-step Process:
@@ -13,12 +19,14 @@ Initializes the text-to-speech engine marytts using LocalMaryInterface.
 
 Sets the voice type and volume.
 
-Calls Speaker.speak() to say: "Hello, I am Mary and I am listening."
+Calls Speaker.speak() to say: **" Hello. I am Mary and I am the voice of this project "**
+Calls Speaker.speak() to say: "And I am listening."
 
 Starts listening for voice commands using CommandProcessor.startListening().
 
 ___________________________________________________________________________________________________________________
- 2. getConfiguration() Function (Class: SpeechConfig)
+**2. getConfiguration() Function (Class: SpeechConfig)**
+ 
 Purpose: Creates and returns the configuration for voice recognition.
 
 What It Does:
@@ -35,7 +43,7 @@ Language Model → helps with sentence prediction.
 
 Returns the config object to the main() function.
 _______________________________________________________________________________________________________
- 3. speak() Function (Class: Speaker)
+**3. speak() Function (Class: Speaker)**
 Purpose: Converts text into speech and plays it through the speakers.
 
 What It Does:
@@ -50,7 +58,7 @@ Plays the audio stream through the system speakers.
 
 Closes the line and stream after playback.
 __________________________________________________________________________________________________________
-4. startListening() Function (Class: CommandProcessor)
+**4. startListening() Function (Class: CommandProcessor)**
 Purpose: Listens for voice commands and performs specific system actions.
 
 What It Does:
@@ -63,31 +71,46 @@ Loops and waits for spoken commands.
 
 For each command it hears, it matches and executes the correct response.
 _______________________________________________________________________________________________________
-VOICE COMMAND PROCESSING :
+**VOICE COMMAND PROCESSING**:
 
-User Speaks a Command;
+**User Speaks a Command;**
 Example: "open chrome", "close settings", etc.
 
-Speech is Captured;
+**Speech is Captured;**
 LiveSpeechRecognizer listens and converts the voice to text using the configuration from SpeechConfig.
 
-Command Matching (Switch-Case);
+**Command Matching (Switch-Case);**
 The recognized text is compared against pre-defined commands inside a switch-case block in the startListening() function.
 
-Text-to-Speech Response;
+**Text-to-Speech Response;**
 If a match is found, Speaker.speak() is called to reply using MaryTTS.
 Example: "Opening settings", "Closing Chrome", etc.
 
-System Command Execution;
+**System Command Execution;**
 Then, the matching system command is executed using:
 Runtime.getRuntime().exec(...)
 
-Loop Continues;
+**Loop Continues;**
 The system goes back to listening for the next command unless the command is "bye".
 
-Exit Command;
+**Exit Command;**
 If the user says "bye", the system responds "Thank you" and stops listening by setting exit = true.
 _____________________________________________________________________________________________________________________________________________
+**Commands used for the Project**
+
+commands to **open** an application
+
+1. **"open chrome"**   -> opens chrome
+2. **"open settings"** -> opens settings
+3. **"open whatsapp"** -> opens whatsapp
+
+commands to **close** an application
+
+1. **"close chrome"**   -> closes chrome
+2. **"close settings"** -> closes settings
+3. **"close whatsapp"** -> closes whatsapp
+_____________________________________________________________________________________________________________________________________________
+
 COLLABRATORS NAME:              GIT-HUB ID'S:
 1. Vidhu Kaushik                https://github.com/Vi-ic1101/
 2. Kushal Trivedi               https://github.com/kushal-trivedi18
