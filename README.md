@@ -2,8 +2,8 @@ INSTRUCTIONS FOR THE PROJECT:
 
 The program starts running with initial sound<br>
 **" Hello. I am Mary and I am the voice of this project "** <br>
-after that it **starts listening** to user's voice using **Sphinx CMU**
-using **MaryTTS** we made this program to speak 
+after that it **"starts listening"** to user's voice using **"Sphinx CMU"**.<br>
+Using **MaryTTS** we made this program to speak 
 _____________________________________________________________________________________________________________________________________________
 
 
