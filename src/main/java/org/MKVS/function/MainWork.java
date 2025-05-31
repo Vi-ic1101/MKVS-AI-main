@@ -41,6 +41,7 @@ public class MainWork{
 
             // Speak a message using MaryTTS 
             Speaker.speak(marytts,"Hello. I am Mary and I am the voice of this project");
+            Speaker.speak(marytts,"And I am listening.");
             CommandProcessor.startListening(marytts,config);
         }catch (Exception e){
             System.err.println("Startup error : "+e.getMessage());
