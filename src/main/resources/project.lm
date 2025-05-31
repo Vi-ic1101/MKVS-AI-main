@@ -1,4 +1,4 @@
-Language model created by QuickLM on Thu May 22 12:48:46 EDT 2025
+Language model created by QuickLM on Sat May 31 06:21:48 EDT 2025
 Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
 
 The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
@@ -7,42 +7,39 @@ The code that was used to produce this language model is available in Open Sourc
 Please visit http://www.speech.cs.cmu.edu/tools/ for more information
 
 The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
-This model based on a corpus of 10 sentences and 15 words
+This model based on a corpus of 9 sentences and 14 words
 
 \data\
-ngram 1=15
-ngram 2=23
-ngram 3=14
+ngram 1=14
+ngram 2=21
+ngram 3=13
 
 \1-grams:
--1.8325 //WHATSAPP -0.2319
--0.8325 </s> -0.3010
--0.8325 <s> -0.2319
--1.8325 BYE -0.2319
--1.8325 CALCULATOR -0.2319
--1.8325 CAMERA -0.2319
--1.5315 CHROME -0.2319
--1.8325 CLOSE -0.2881
--1.8325 NOTEPAD -0.2319
--1.8325 ON -0.2946
--1.8325 OPEN -0.2881
--1.8325 SEARCH -0.2946
--1.8325 SETTINGS -0.2319
--1.8325 URL -0.2319
--1.8325 YOUTUBE -0.2319
+-0.8381 </s> -0.3010
+-0.8381 <s> -0.2329
+-1.7924 BYE -0.2329
+-1.7924 CALCULATOR -0.2329
+-1.7924 CAMERA -0.2329
+-1.4914 CHROME -0.2329
+-1.7924 CLOSE -0.2868
+-1.7924 NOTEPAD -0.2329
+-1.7924 ON -0.2940
+-1.7924 OPEN -0.2868
+-1.7924 SEARCH -0.2940
+-1.7924 SETTINGS -0.2329
+-1.7924 WHATSAPP -0.2329
+-1.7924 YOUTUBE -0.2329
 
 \2-grams:
--0.3010 //WHATSAPP </s> -0.3010
--1.3010 <s> //WHATSAPP 0.0000
--1.3010 <s> BYE 0.0000
--1.3010 <s> CALCULATOR 0.0000
--1.3010 <s> CAMERA 0.0000
--1.3010 <s> CLOSE 0.0000
--1.3010 <s> NOTEPAD 0.0000
--1.3010 <s> OPEN 0.0000
--1.3010 <s> SEARCH 0.0000
--1.3010 <s> SETTINGS 0.0000
--1.3010 <s> URL 0.0000
+-1.2553 <s> BYE 0.0000
+-1.2553 <s> CALCULATOR 0.0000
+-1.2553 <s> CAMERA 0.0000
+-1.2553 <s> CLOSE 0.0000
+-1.2553 <s> NOTEPAD 0.0000
+-1.2553 <s> OPEN 0.0000
+-1.2553 <s> SEARCH 0.0000
+-1.2553 <s> SETTINGS 0.0000
+-1.2553 <s> WHATSAPP 0.0000
 -0.3010 BYE </s> -0.3010
 -0.3010 CALCULATOR </s> -0.3010
 -0.3010 CAMERA </s> -0.3010
@@ -53,11 +50,10 @@ ngram 3=14
 -0.3010 OPEN CHROME 0.0000
 -0.3010 SEARCH ON 0.0000
 -0.3010 SETTINGS </s> -0.3010
--0.3010 URL </s> -0.3010
+-0.3010 WHATSAPP </s> -0.3010
 -0.3010 YOUTUBE </s> -0.3010
 
 \3-grams:
--0.3010 <s> //WHATSAPP </s>
 -0.3010 <s> BYE </s>
 -0.3010 <s> CALCULATOR </s>
 -0.3010 <s> CAMERA </s>
@@ -66,7 +62,7 @@ ngram 3=14
 -0.3010 <s> OPEN CHROME
 -0.3010 <s> SEARCH ON
 -0.3010 <s> SETTINGS </s>
--0.3010 <s> URL </s>
+-0.3010 <s> WHATSAPP </s>
 -0.3010 CLOSE CHROME </s>
 -0.3010 ON YOUTUBE </s>
 -0.3010 OPEN CHROME </s>

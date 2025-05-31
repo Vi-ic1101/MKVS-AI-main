@@ -3,7 +3,7 @@ settings
 camera
 calculator
 
-//WhatsApp
+WhatsApp
 search on youtube 
 
 bye
