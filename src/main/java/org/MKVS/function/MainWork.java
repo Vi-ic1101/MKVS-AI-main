@@ -2,24 +2,23 @@ package org.MKVS.function;
 
 // Standard Java I/O
 import java.io.IOException;
-import java.lang.annotation.Target;
-import java.util.Arrays;
 
 import javax.sound.sampled.*;
-
+//import org.MKVS.function.SettingParameters;
 
 // MaryTTS classes for speech synthesis
 import marytts.*;
-import marytts.exceptions.*;
+//import marytts.exceptions.*;
 
 // Utility for playing audio
-import marytts.util.data.audio.AudioPlayer;
+//import marytts.util.data.audio.AudioPlayer;
+
 
 import org.json.JSONObject;
 import org.vosk.*;
 
-
-
+//import java.time.*;
+//import java.time.format.*;
 
 public class MainWork{
     public static void main(String[] st){
@@ -46,8 +45,13 @@ public class MainWork{
            marytts.setAudioEffects("Volume(amount:0.6)");
 
             // Speak a message using MaryTTS
-            Speaker.speak(marytts,"Hello. I am Mary and I am the voice of this project");
-            Speaker.speak(marytts,"And I am listening.");
+            Speaker.speak(marytts,"Welcome to MKVS, mini prototype Artificial Intelligence model.");
+            Speaker.speak(marytts,"MKVS, stands for teams first initials.");
+            Speaker.speak(marytts,"M for Mayank, K for Kushal, V for Vidhu, and S for Sunny.");
+            Speaker.speak(marytts,"model that is decide for me is Mach for MK. five for V, and Special for S.  ");
+            Speaker.speak(marytts,"tech specs used are, first is VOSK for speech recognition, second is Mary TTS, for voice output.");
+            Speaker.speak(marytts,"voice is the female United states adult that is CMU-SLT-HSMM.");
+            Speaker.speak(marytts,"thats! all about me, thank you.");
             CommandProcessor.startListening(marytts);
         }catch (Exception e){
             System.err.println("Startup error : "+e.getMessage());
@@ -121,11 +125,19 @@ class CommandProcessor{
         microphone.open(format);
         microphone.start();
         System.out.println("listening...");
+        Speaker.speak(marytts,"Now we can proceed to voice commands.");
 
         byte[] buffer = new byte[4096];
         // Flag to control recognition loop
         boolean exit = false;
-// &&(result = recognizer.getResult())!=null
+        String searchQuery;
+        String finalSearch;
+        boolean waiting=false;
+        boolean waitingForParameterInput=false;
+        String param;
+        String tempParamValue;
+        double paramValue;
+
         while(!exit){
             int bytesRead = microphone.read(buffer,0, buffer.length);
             if (recognizer.acceptWaveForm(buffer, bytesRead)) {
@@ -143,60 +155,119 @@ class CommandProcessor{
 
                 System.out.println("Recognized command: '" + command + "'");
 
-                if (command.isEmpty()) {
+                if (command.isBlank()) {
                     if(count < 5){
                        marytts.setAudioEffects("Volume(amount:0.6)");
 
-                        Speaker.speak(marytts,"sir are you there ");
+                        Speaker.speak(marytts,"sir are you there?");
                         count++;
-                        System.out.println("No command recognized, continuing..."+ count);
+                        System.out.println("No command recognized, continuing...");
                     }else{
-                        Speaker.speak(marytts,"looks like no one is here");
+                        Speaker.speak(marytts,"looks like no one is here.");
                         break;
                     }
                     continue;
                 }
+                count=0;
 
-                 switch (command) {
-                     // Open Windows Settings
-                     case "open settings":
-                         Speaker.speak(marytts, "opening settings");
-                         Runtime.getRuntime().exec("cmd.exe /c start ms-settings:");
-                         break;
-                     // Close Windows Settings
-                     case "close settings":
-                         Speaker.speak(marytts, "closing settings");
-                         Runtime.getRuntime().exec("cmd.exe /c TASKKILL /IM SystemSettings.exe /F");
-                         break;
+                 if(!command.isBlank()){
+                     if(command.toLowerCase().contains("browser") || command.toLowerCase().contains("browse")) {
+                         Speaker.speak(marytts,"what should i search for? ");
+                         waiting=true;
+                         continue;
+                     }
+                     if(waiting){
+                         if(command.contains("search for")) {
+                             int indexforSearchFor = command.toLowerCase().indexOf("search for");
+                             if (indexforSearchFor != -1) {
+                                 searchQuery = command.substring(indexforSearchFor + "search for".length()).trim();
+                                 if (!searchQuery.isBlank()) {
+                                     finalSearch = searchQuery.replace(" ", "+");
+                                     Speaker.speak(marytts, "searching for." + searchQuery );
+                                     try {
+                                         Runtime.getRuntime().exec("cmd.exe /c start https://google.com/search?q=" + finalSearch);
+                                     } catch (IOException e) {
+                                         Speaker.speak(marytts,"unable to perform actions.");
+                                         System.err.println("error "+ e.getMessage());
+                                     }
+                                 }else{
+                                     Speaker.speak(marytts,"you didn't say anything.");
+                                 }
+                                 waiting=false;
+                                 continue;
+                             }
+                         }else{
+                             searchQuery=command.trim();
+                             if(!searchQuery.isBlank()){
+                                 finalSearch=searchQuery.replace(" ","+");
+                                 Speaker.speak(marytts,"searching for."+searchQuery);
+                                 try {
+                                     Runtime.getRuntime().exec("cmd.exe /c start chrome.exe --guest https://google.com/search?q="+finalSearch);
+                                 }catch (IOException e){
+                                     Speaker.speak(marytts,"unable to perform actions.");
+                                     System.err.println("error "+ e.getMessage());
+                                 }
+                             }
+                         }
+                         // Close Google Chrome
+                        waiting=false;
+                     }
+                     if (command.contains("close search")||command.contains("close tab")) {
+                         Speaker.speak(marytts, "closing search.");
+                         try {
+                             Runtime.getRuntime().exec("cmd.exe /c TASKKILL /IM chrome.exe /F");
+                         } catch (IOException e) {
+                             Speaker.speak(marytts, "unable to perform actions.");
+                             System.err.println("error " + e.getMessage());
+                         }
+                     }
+                     if (!command.isBlank()) {
+                         if (!waitingForParameterInput && (command.contains("go to settings") || command.contains("settings"))) {
+                             Speaker.speak(marytts, "Opening my settings.");
+                             Speaker.speak(marytts, "What do you want to change? Say something like 'honesty 75'");
+                             waitingForParameterInput = true;
+                             continue;
+                         }
+                         if (waitingForParameterInput) {
+                             String[] parts = command.split("\\s+");
+                             if (parts.length >= 1) {
+                                 param = parts[0].toLowerCase();
+                                  paramValue = 75.0;  // Fixed value
 
-                     // Open Google Chrome
-                     case "open chrome":
-                         Speaker.speak(marytts, "opening chrome");
-                         Runtime.getRuntime().exec("cmd.exe /c start chrome.exe");
-                         break;
+                                 // Allow only specific parameters
+                                 if (param.equals("honesty") || param.equals("curiosity") ||
+                                         param.equals("patience") || param.equals("humour")) {
 
-                     // Close Google Chrome
-                     case "close chrome":
-                         Speaker.speak(marytts, "closing chrome");
-                         Runtime.getRuntime().exec("cmd.exe /c TASKKILL /IM chrome.exe /F");
-                         break;
+                                     SettingParameters.updateParameters(param, paramValue);
+                                     Speaker.speak(marytts, "Updated " + param + " to " + paramValue);
+                                     System.out.println("current " +param + SettingParameters.showParameters().get(param));
 
-                     // Open whatsapp
-                     case "open whatsapp":
-                         Speaker.speak(marytts, "opening whatsapp");
+                                 } else {
+                                     Speaker.speak(marytts, "I can only update honesty, curiosity, patience or humour.");
+                                 }
+                             } else {
+                                 Speaker.speak(marytts, "Please say the parameter name like 'humour'.");
+                             }
+
+                             waitingForParameterInput = false;
+                             continue;
+                         }
+
+                     }
+
+                     if(command.contains("open whatsapp")) {
+                         Speaker.speak(marytts, "opening whatsapp.");
                          Runtime.getRuntime().exec("cmd.exe /c start whatsapp:");
-                         break;
-                     // closing whatsapp
-                     case "close whatsapp":
-                         Speaker.speak(marytts, "closing whatsapp");
+                     }
+                     if(command.contains("close whatsapp")) {
+                         Speaker.speak(marytts, "closing whatsapp.");
                          Runtime.getRuntime().exec("cmd.exe /c TASKKILL /IM whatsapp.exe /F");
+                     }
+                     if(command.contains("bye")||command.contains("exit")||command.contains("thank you")) {
+                         Speaker.speak(marytts, "thank you very much sir.");
                          break;
+                     }
 
-                     // to end the program
-                     case "bye":
-                         Speaker.speak(marytts, "thank you");
-                         exit = true;
-                         break;
                  }
              }
         }
