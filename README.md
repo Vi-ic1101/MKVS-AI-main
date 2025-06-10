@@ -1,7 +1,7 @@
 INSTRUCTIONS FOR THE PROJECT:
 
 The program starts running with initial sound<br>
-**" Hello. I am Mary and I am the voice of this project "** <br>
+**" project introduction "** <br>
 after that it **"starts listening"** to user's voice using **"Vosk"**.<br>
 Using **MaryTTS** we made this program to speak 
 _____________________________________________________________________________________________________________________________________________
