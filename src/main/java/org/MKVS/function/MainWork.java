@@ -224,7 +224,7 @@ class CommandProcessor{
                      if (!command.isBlank()) {
                          if (!waitingForParameterInput && (command.contains("go to settings") || command.contains("settings"))) {
                              Speaker.speak(marytts, "Opening my settings.");
-                             Speaker.speak(marytts, "What do you want to change? Say something like 'honesty 75'");
+                             Speaker.speak(marytts, "What do you want to change? Say something like 'honesty 75'.");
                              waitingForParameterInput = true;
                              continue;
                          }
