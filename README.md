@@ -5,113 +5,97 @@ The program starts running with initial sound<br>
 after that it **"starts listening"** to user's voice using **"Sphinx CMU"**.<br>
 Using **MaryTTS** we made this program to speak 
 _____________________________________________________________________________________________________________________________________________
+# How It Works (Class Breakdown)
+
+# 1. `MainWork` (Main Entry Point)
+
+This is the starting point of the program.
+
+# What it does:
+
+* Configures the audio settings (sample rate, bit depth, disables default mixers).
+* Initializes the **MaryTTS voice engine**.
+* Sets the voice to a female American English voice (`cmu-slt-hsmm`).
+* Applies a volume effect to reduce distortion.
+* Speaks two introductory lines using the `Speaker.speak()` method.
+* Starts listening for voice commands using the `CommandProcessor.startListening()` method.
+
+---
+
+# 2. `Speaker` (Text-to-Speech)
+
+Handles speaking functionality using **MaryTTS**.
+
+# How it works:
+
+* Takes in text and uses MaryTTS to synthesize speech.
+* Converts the generated audio to a playable format (PCM signed 16-bit).
+* Streams the audio to the system’s speakers in real time.
+* Closes and cleans up resources after playback.
+
+---
+
+# 3. `CommandProcessor` (Voice Recognition & Command Execution)
+
+Responsible for **listening to the microphone**, recognizing speech using **Vosk**, and executing system commands.
+
+# What it does:
+
+* Loads the Vosk model from: `src/main/resources/vosk-model-en-in-0.5`.
+* Captures live audio input using Java’s `TargetDataLine`.
+* Continuously listens and checks if any recognizable speech is received.
+* If no input is detected 5 times in a row, MaryTTS prompts: “Sir, are you there?”, then “Looks like no one is here” and exits.
+* If valid input is recognized:
+
+  * Parses the Vosk output (JSON) and extracts the command.
+  * Matches it against a list of known commands.
+  * Speaks a response using MaryTTS.
+  * Executes the corresponding Windows command using `Runtime.getRuntime().exec(...)`.
+
+---
+
+ Voice Command Workflow
+
+ Example:
+
+1. User says: “open chrome”
+2. [Vosk model] captures and recognizes the voice
+3. Recognized text: `"open chrome"`
+4. Matched in a switch-case block
+5. MaryTTS responds: “Opening Chrome”
+6. System executes: `start chrome.exe`
+
+---
+
+ Supported Voice Commands:
+
+| Command          | Action                       |
+| ---------------- | ---------------------------- |
+| "open chrome"    | Opens Google Chrome          |
+| "close chrome"   | Closes Google Chrome         |
+| "open settings"  | Opens Windows Settings       |
+| "close settings" | Closes Windows Settings      |
+| "open whatsapp"  | Opens WhatsApp (UWP)         |
+| "close whatsapp" | Closes WhatsApp              |
+| "bye"            | Speaks "Thank you" and exits |
+
+---
+
+ Requirements:
+
+* Java 8 or later
+* MaryTTS library
+* Vosk API for Java
+* Vosk English model (e.g., `vosk-model-en-in-0.5`)
+* Microphone access
+* Windows OS (for the system command integration)
+
+---
 
 
-**1. main() Function (Class: MainWork)**
-Purpose: This is the main entry point of the program. It initializes everything.
 
-Step-by-step Process:
 
-Sets audio system properties for MaryTTS.
-
-Calls SpeechConfig.getConfiguration() to get the configuration needed for speech recognition.
-
-Initializes the text-to-speech engine marytts using LocalMaryInterface.
-
-Sets the voice type and volume.
-
-Calls Speaker.speak() to say: **" Hello. I am Mary and I am the voice of this project "**
-Calls Speaker.speak() to say: "And I am listening."
-
-Starts listening for voice commands using CommandProcessor.startListening().
-
-___________________________________________________________________________________________________________________
-**2. getConfiguration() Function (Class: SpeechConfig)**
- 
-Purpose: Creates and returns the configuration for voice recognition.
-
-What It Does:
-
-Creates a new Configuration object.
-
-Sets the paths for:
-
-Acoustic Model → helps detect sounds.
-
-Dictionary → defines valid words.
-
-Language Model → helps with sentence prediction.
-
-Returns the config object to the main() function.
-_______________________________________________________________________________________________________
-**3. speak() Function (Class: Speaker)**
-Purpose: Converts text into speech and plays it through the speakers.
-
-What It Does:
-
-Uses marytts.generateAudio() to convert the text into an audio stream.
-
-Converts the audio format into PCM (playable format).
-
-Opens a sound line using AudioSystem.
-
-Plays the audio stream through the system speakers.
-
-Closes the line and stream after playback.
-__________________________________________________________________________________________________________
-**4. startListening() Function (Class: CommandProcessor)**
-Purpose: Listens for voice commands and performs specific system actions.
-
-What It Does:
-
-Creates a LiveSpeechRecognizer using the config.
-
-Starts continuous listening (startRecognition(true)).
-
-Loops and waits for spoken commands.
-
-For each command it hears, it matches and executes the correct response.
-_______________________________________________________________________________________________________
-**VOICE COMMAND PROCESSING**:
-
-**User Speaks a Command;**
-Example: "open chrome", "close settings", etc.
-
-**Speech is Captured;**
-LiveSpeechRecognizer listens and converts the voice to text using the configuration from SpeechConfig.
-
-**Command Matching (Switch-Case);**
-The recognized text is compared against pre-defined commands inside a switch-case block in the startListening() function.
-
-**Text-to-Speech Response;**
-If a match is found, Speaker.speak() is called to reply using MaryTTS.
-Example: "Opening settings", "Closing Chrome", etc.
-
-**System Command Execution;**
-Then, the matching system command is executed using:
-Runtime.getRuntime().exec(...)
-
-**Loop Continues;**
-The system goes back to listening for the next command unless the command is "bye".
-
-**Exit Command;**
-If the user says "bye", the system responds "Thank you" and stops listening by setting exit = true.
-_____________________________________________________________________________________________________________________________________________
-**Commands used for the Project**
-
-commands to **open** an application
-
-1. **"open chrome"**   -> opens chrome
-2. **"open settings"** -> opens settings
-3. **"open whatsapp"** -> opens whatsapp
-
-commands to **close** an application
-
-1. **"close chrome"**   -> closes chrome
-2. **"close settings"** -> closes settings
-3. **"close whatsapp"** -> closes whatsapp
-_____________________________________________________________________________________________________________________________________________
-
+-------------------------------------------------------------------------------------------------------------------------------------------
 COLLABRATORS NAME:              GIT-HUB ID'S:
 1. Vidhu Kaushik                https://github.com/Vi-ic1101/
 2. Kushal Trivedi               https://github.com/kushal-trivedi18
