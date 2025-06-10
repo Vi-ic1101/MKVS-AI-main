@@ -54,9 +54,9 @@ Responsible for **listening to the microphone**, recognizing speech using **Vosk
 
 ---
 
- Voice Command Workflow
+# Voice Command Workflow
 
- Example:
+**Example**:
 
 1. User says: “open chrome”
 2. [Vosk model] captures and recognizes the voice
@@ -67,7 +67,7 @@ Responsible for **listening to the microphone**, recognizing speech using **Vosk
 
 ---
 
- Supported Voice Commands:
+# Supported Voice Commands:
 
 | Command          | Action                       |
 | ---------------- | ---------------------------- |
@@ -81,7 +81,7 @@ Responsible for **listening to the microphone**, recognizing speech using **Vosk
 
 ---
 
- Requirements:
+# Requirements:
 
 * Java 8 or later
 * MaryTTS library
