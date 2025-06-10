@@ -96,7 +96,7 @@ Responsible for **listening to the microphone**, recognizing speech using **Vosk
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------
-COLLABRATORS NAME:              GIT-HUB ID'S:
+**COLLABRATORS NAME**:             **GIT-HUB ID'S**:
 1. Vidhu Kaushik                https://github.com/Vi-ic1101/
 2. Kushal Trivedi               https://github.com/kushal-trivedi18
 3. Mayank Kaul                  https://github.com/Mayankkau1
