@@ -114,7 +114,7 @@ class CommandProcessor{
         int count = 0;
         //using vosk model
         LibVosk.setLogLevel(LogLevel.WARNINGS);
-        Model model=new Model("src/main/resources/vosk-model-en-in-0.5");
+        Model model=new Model("src/main/resources/vosk-model-small-en-in-0.4");
         Recognizer recognizer = new Recognizer(model,16000.0f);
 
         //using default microphone
